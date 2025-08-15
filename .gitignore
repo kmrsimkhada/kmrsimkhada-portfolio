@@ -99,6 +99,13 @@ setup-initial-credentials.sh
 setup-secure-auth.sh
 change-admin-credentials.sh
 
+# All deployment scripts
+*.sh
+
+# Deployment documentation
+DEPLOYMENT.md
+deployment-checklist.md
+
 # AWS configuration files
 dns-records.json
 www-redirect.json
