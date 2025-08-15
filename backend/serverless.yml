@@ -1,0 +1,379 @@
+service: portfolio-backend
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-southeast-2
+  stage: ${opt:stage, 'dev'}
+  environment:
+    ARTICLES_TABLE: ${self:service}-articles-${self:provider.stage}
+    BOOKS_TABLE: ${self:service}-books-${self:provider.stage}
+    LOCATIONS_TABLE: ${self:service}-locations-${self:provider.stage}
+    COMMENTS_TABLE: ${self:service}-comments-${self:provider.stage}
+    PROJECTS_TABLE: ${self:service}-projects-${self:provider.stage}
+    SKILLS_TABLE: ${self:service}-skills-${self:provider.stage}
+    EXPERIENCES_TABLE: ${self:service}-experiences-${self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:service}-articles-${self:provider.stage}"
+        - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:service}-books-${self:provider.stage}"
+        - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:service}-locations-${self:provider.stage}"
+        - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:service}-comments-${self:provider.stage}"
+        - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:service}-comments-${self:provider.stage}/index/*"
+        - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:service}-projects-${self:provider.stage}"
+        - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:service}-skills-${self:provider.stage}"
+        - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:service}-experiences-${self:provider.stage}"
+    - Effect: Allow
+      Action:
+        - ssm:GetParameter
+        - ssm:GetParameters
+        - ssm:PutParameter
+      Resource:
+        - "arn:aws:ssm:${self:provider.region}:*:parameter/portfolio/admin/*"
+
+functions:
+  # Blog Articles
+  getArticles:
+    handler: handlers/articles.getAll
+    events:
+      - http:
+          path: articles
+          method: get
+          cors: true
+  
+  getArticle:
+    handler: handlers/articles.getOne
+    events:
+      - http:
+          path: articles/{id}
+          method: get
+          cors: true
+  
+  createArticle:
+    handler: handlers/articles.create
+    events:
+      - http:
+          path: articles
+          method: post
+          cors: true
+  
+  updateArticle:
+    handler: handlers/articles.update
+    events:
+      - http:
+          path: articles/{id}
+          method: put
+          cors: true
+  
+  deleteArticle:
+    handler: handlers/articles.delete
+    events:
+      - http:
+          path: articles/{id}
+          method: delete
+          cors: true
+
+  # Books
+  getBooks:
+    handler: handlers/books.getAll
+    events:
+      - http:
+          path: books
+          method: get
+          cors: true
+  
+  createBook:
+    handler: handlers/books.create
+    events:
+      - http:
+          path: books
+          method: post
+          cors: true
+  
+  updateBook:
+    handler: handlers/books.update
+    events:
+      - http:
+          path: books/{id}
+          method: put
+          cors: true
+  
+  deleteBook:
+    handler: handlers/books.delete
+    events:
+      - http:
+          path: books/{id}
+          method: delete
+          cors: true
+
+  # Travel Locations
+  getLocations:
+    handler: handlers/locations.getAll
+    events:
+      - http:
+          path: locations
+          method: get
+          cors: true
+  
+  createLocation:
+    handler: handlers/locations.create
+    events:
+      - http:
+          path: locations
+          method: post
+          cors: true
+  
+  updateLocation:
+    handler: handlers/locations.update
+    events:
+      - http:
+          path: locations/{id}
+          method: put
+          cors: true
+  
+  deleteLocation:
+    handler: handlers/locations.delete
+    events:
+      - http:
+          path: locations/{id}
+          method: delete
+          cors: true
+
+  # Comments
+  getComments:
+    handler: handlers/comments.getByArticle
+    events:
+      - http:
+          path: comments/article/{articleId}
+          method: get
+          cors: true
+  
+  createComment:
+    handler: handlers/comments.create
+    events:
+      - http:
+          path: comments/article/{articleId}
+          method: post
+          cors: true
+
+  # Projects
+  getProjects:
+    handler: handlers/projects.getAll
+    events:
+      - http:
+          path: projects
+          method: get
+          cors: true
+  
+  createProject:
+    handler: handlers/projects.create
+    events:
+      - http:
+          path: projects
+          method: post
+          cors: true
+  
+  updateProject:
+    handler: handlers/projects.update
+    events:
+      - http:
+          path: projects/{id}
+          method: put
+          cors: true
+  
+  deleteProject:
+    handler: handlers/projects.delete
+    events:
+      - http:
+          path: projects/{id}
+          method: delete
+          cors: true
+
+  # Skills
+  getSkills:
+    handler: handlers/skills.getAll
+    events:
+      - http:
+          path: skills
+          method: get
+          cors: true
+  
+  createSkill:
+    handler: handlers/skills.create
+    events:
+      - http:
+          path: skills
+          method: post
+          cors: true
+  
+  updateSkill:
+    handler: handlers/skills.update
+    events:
+      - http:
+          path: skills/{id}
+          method: put
+          cors: true
+  
+  deleteSkill:
+    handler: handlers/skills.delete
+    events:
+      - http:
+          path: skills/{id}
+          method: delete
+          cors: true
+
+  # Experiences
+  getExperiences:
+    handler: handlers/experiences.getAll
+    events:
+      - http:
+          path: experiences
+          method: get
+          cors: true
+  
+  createExperience:
+    handler: handlers/experiences.create
+    events:
+      - http:
+          path: experiences
+          method: post
+          cors: true
+  
+  updateExperience:
+    handler: handlers/experiences.update
+    events:
+      - http:
+          path: experiences/{id}
+          method: put
+          cors: true
+  
+  deleteExperience:
+    handler: handlers/experiences.delete
+    events:
+      - http:
+          path: experiences/{id}
+          method: delete
+          cors: true
+
+  # Admin Auth
+  adminLogin:
+    handler: handlers/auth.login
+    events:
+      - http:
+          path: admin/login
+          method: post
+          cors: true
+
+  adminChangeCredentials:
+    handler: handlers/auth.changeCredentials
+    events:
+      - http:
+          path: admin/change-credentials
+          method: post
+          cors: true
+
+resources:
+  Resources:
+    ArticlesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-articles-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    BooksTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-books-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    LocationsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-locations-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    CommentsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-comments-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: articleId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: ArticleIndex
+            KeySchema:
+              - AttributeName: articleId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+        BillingMode: PAY_PER_REQUEST
+
+    ProjectsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-projects-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    SkillsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-skills-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    ExperiencesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-experiences-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+plugins:
+  - serverless-offline

@@ -1,0 +1,126 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+*/node_modules
+
+# Build outputs
+dist
+dist-ssr
+build
+*.local
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.local
+
+# AWS and Serverless
+.serverless/
+backend/.serverless/
+.aws-sam/
+
+# Deployment and configuration files with sensitive data
+aws-config.json
+credentials.json
+ssl-certs/
+*.pem
+*.key
+*.crt
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Project-specific files that shouldn't be committed
+# Deployment scripts with sensitive information
+setup-initial-credentials.sh
+setup-secure-auth.sh
+change-admin-credentials.sh
+
+# AWS configuration files
+dns-records.json
+www-redirect.json
+create-cloudfront-simple.json
+
+# Documentation that contains sensitive URLs (optional - keep if you want to commit docs)
+# PROJECT_URLS.md
+
+# Metadata files
+metadata.json
+
+# Backup files
+*.backup
+*.bak
+*~
+
+# MacOS specific
+.AppleDouble
+.LSOverride
+
+# Windows specific
+*.db
+
+# Linux specific
+*~

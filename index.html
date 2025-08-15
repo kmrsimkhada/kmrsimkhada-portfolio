@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kumar Simkhada | Software & Data Engineer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Hide scrollbar for mobile admin tabs */
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Mobile viewport fixes */
+    @media (max-width: 640px) {
+      .mobile-padding {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            'background': '#0D1117',
+            'surface': '#161B22',
+            'surface-light': '#21262D',
+            'muted': '#475569',
+            'text-primary': '#F0F6FC',
+            'text-secondary': '#8B949E',
+            'accent': '#22d3ee',
+            'accent-light': '#67e8f9',
+            'aurora-cyan': '#06b6d4',
+            'aurora-teal': '#14b8a6',
+          },
+          animation: {
+            'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+            'dramatic-fade-in-up': 'dramaticFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'tilt': 'tilt 10s infinite linear',
+            'shine': 'shine 1s ease-in-out',
+            'background-pan': 'backgroundPan 3s linear infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'glow': 'glow 2s ease-in-out infinite alternate',
+            'slide-in-left': 'slideInLeft 0.6s ease-out forwards',
+            'slide-in-right': 'slideInRight 0.6s ease-out forwards',
+            'bounce-subtle': 'bounceSubtle 2s ease-in-out infinite',
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: 0, transform: 'translateY(20px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' },
+            },
+            dramaticFadeInUp: {
+              '0%': { opacity: 0, transform: 'translateY(40px)', filter: 'blur(3px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)', filter: 'blur(0)' },
+            },
+            tilt: {
+              '0%, 100%': { transform: 'rotate(0deg)' },
+              '25%': { transform: 'rotate(0.5deg)' },
+              '75%': { transform: 'rotate(-0.5deg)' }
+            },
+            shine: {
+              '0%': { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(100%)' },
+            },
+            backgroundPan: {
+              '0%': { 'background-position': '0% center' },
+              '100%': { 'background-position': '-200% center' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' }
+            },
+            glow: {
+              '0%': { 'box-shadow': '0 0 5px rgba(34, 211, 238, 0.2)' },
+              '100%': { 'box-shadow': '0 0 20px rgba(34, 211, 238, 0.4), 0 0 30px rgba(34, 211, 238, 0.2)' }
+            },
+            slideInLeft: {
+              '0%': { opacity: 0, transform: 'translateX(-50px)' },
+              '100%': { opacity: 1, transform: 'translateX(0)' }
+            },
+            slideInRight: {
+              '0%': { opacity: 0, transform: 'translateX(50px)' },
+              '100%': { opacity: 1, transform: 'translateX(0)' }
+            },
+            bounceSubtle: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-5px)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "react": "https://esm.sh/react@^19.1.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/"
+  }
+}
+</script>
+</head>
+
+<body class="bg-background font-sans text-text-secondary antialiased">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>
