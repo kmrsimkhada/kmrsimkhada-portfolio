@@ -107,8 +107,8 @@ DEPLOYMENT.md
 deployment-checklist.md
 setup-cloudfront.md
 quick-domain-setup.md
-cloudflare-setup.md
 PROJECT_URLS.md
+cloudflare-setup.md
 
 # AWS configuration files
 dns-records.json
