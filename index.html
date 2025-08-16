@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kumar Simkhada | Software & Data Engineer</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,49 +30,6 @@
       .mobile-padding {
         padding-left: 1rem;
         padding-right: 1rem;
-      }
-    }
-    
-    /* Enhanced mobile navigation fixes */
-    body {
-      overscroll-behavior: none;
-      -webkit-overflow-scrolling: touch;
-    }
-    
-    /* Fix iOS Safari viewport height issues */
-    @supports (-webkit-touch-callout: none) {
-      .mobile-menu-container {
-        height: -webkit-fill-available;
-      }
-    }
-    
-    /* Fix for iOS Safari bottom navigation bar */
-    @media screen and (max-width: 768px) {
-      .fixed-header {
-        padding-top: env(safe-area-inset-top);
-      }
-      
-      .mobile-menu {
-        height: 100vh;
-        height: -webkit-fill-available;
-        padding-top: env(safe-area-inset-top);
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-      
-      /* Better touch targets for mobile */
-      .nav-link {
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .menu-toggle {
-        min-width: 44px;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
     }
   </style>
