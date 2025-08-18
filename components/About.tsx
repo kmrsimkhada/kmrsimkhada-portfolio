@@ -10,13 +10,13 @@ const About: React.FC = () => {
             Hello! I'm Kumar, a passionate Software and Data Engineer with a knack for building robust, scalable applications and intelligent data solutions. My journey in technology has been driven by a relentless curiosity to solve complex problems and create meaningful impact.
           </p>
           <p>
-            With a strong foundation in computer science, I specialize in both front-end and back-end development, as well as designing and implementing large-scale data processing systems. I thrive in dynamic environments where I can leverage my skills in Python, TypeScript, cloud computing, and MLOps to bring ideas to life.
+            With a strong foundation in computer science, I specialize in full stack development, as well as designing and implementing large scale data processing systems. I thrive in dynamic environments where I can leverage my skills in Python, React, C#, TypeScript, cloud computing, and Data Engineering to bring ideas to life.
           </p>
            <p>
-            My career has taken me across three continents—Asia, Europe, and Australia—giving me a unique global perspective from working in diverse cultures and international markets. This has honed my adaptability and cross-cultural communication skills, allowing me to collaborate effectively with global teams.
+            My career has taken me across three continents: Asia, Europe, and Australia; giving me a unique global perspective from working in diverse cultures and international markets. This has honed my adaptability and cross-cultural communication skills, allowing me to collaborate effectively with global teams.
           </p>
           <p>
-            When I'm not coding, you can find me exploring the latest tech trends, contributing to open-source projects, or hiking in the mountains. I'm always eager to connect with like-minded individuals and explore new opportunities for collaboration.
+            When I'm not coding, you can find me exploring the latest tech trends, playing football, reading books, or hiking in the mountains. I'm always eager to connect with like minded individuals and explore new opportunities for collaboration.
           </p>
         </div>
         <div className="md:col-span-2 flex justify-center md:justify-start">
