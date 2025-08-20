@@ -4,6 +4,8 @@ import { apiService } from '../services/api';
 import type { Skill } from '../types';
 
 const Skills: React.FC = () => {
+  console.log('🎨 Skills component: Component is rendering!');
+  
   const [skills, setSkills] = useState<{ [key: string]: Skill[] }>({});
   const [loading, setLoading] = useState(true);
   const [visibleSkills, setVisibleSkills] = useState<Set<string>>(new Set());
@@ -11,7 +13,10 @@ const Skills: React.FC = () => {
   useEffect(() => {
     const loadSkills = async () => {
       try {
+        console.log('🔍 Skills component: Starting to load skills...');
         const data = await apiService.getSkills();
+        console.log('✅ Skills component: API response:', data);
+        
         // Group skills by category
         const groupedSkills = data.reduce((acc: { [key: string]: Skill[] }, skill: Skill) => {
           const category = skill.category || 'Other';
@@ -22,14 +27,17 @@ const Skills: React.FC = () => {
           return acc;
         }, {});
         
+        console.log('📊 Skills component: Grouped skills:', groupedSkills);
+        
         // Sort skills within each category by order
         Object.keys(groupedSkills).forEach(category => {
           groupedSkills[category].sort((a, b) => (a.order || 0) - (b.order || 0));
         });
         
+        console.log('🎯 Skills component: Setting skills state:', groupedSkills);
         setSkills(groupedSkills);
       } catch (error) {
-        console.error('Failed to load skills:', error);
+        console.error('❌ Skills component: Failed to load skills:', error);
         setSkills({});
       } finally {
         setLoading(false);
@@ -61,6 +69,15 @@ const Skills: React.FC = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  // Temporarily make all skills visible immediately
+  useEffect(() => {
+    if (Object.keys(skills).length > 0) {
+      console.log('🎯 Skills component: Making all skills visible immediately');
+      const allSkillNames = Object.values(skills).flat().map(skill => skill.name);
+      setVisibleSkills(new Set(allSkillNames));
+    }
+  }, [skills]);
 
   const getSkillIcon = (skillName: string) => {
     const icons: { [key: string]: string } = {

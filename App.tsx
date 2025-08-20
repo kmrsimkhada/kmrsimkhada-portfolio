@@ -35,7 +35,7 @@ const App: React.FC = () => {
               <ParticleBackground />
               <div className="relative z-10">
                 <Header />
-                <main className="px-6 sm:px-8 md:px-16 lg:px-24 max-w-6xl mx-auto">
+                <main className="px-4 sm:px-6 md:px-16 lg:px-24 max-w-6xl mx-auto pt-24 sm:pt-28">
                   <Hero name={name} />
                   <About />
                   <Experience />

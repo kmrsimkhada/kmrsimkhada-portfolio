@@ -9,6 +9,7 @@ import { TravelLocation, TravelStatus } from '../types';
 
 const Travel: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TravelStatus>('visited');
+  const [loading, setLoading] = useState(true);
 
   // Load travel data from localStorage
   const [travelData, setTravelData] = useState<{ [key in TravelStatus]: TravelLocation[] }>({
@@ -21,17 +22,24 @@ const Travel: React.FC = () => {
   useEffect(() => {
     const load = async () => {
       try {
+        console.log('🌍 Travel: Starting to load locations...');
         const locations: TravelLocation[] = await apiService.getLocations();
+        console.log('✅ Travel: API response:', locations);
+        
         const organizedData = {
           lived: locations.filter(loc => loc.status === 'lived'),
           visited: locations.filter(loc => loc.status === 'visited'),
           wantToVisit: locations.filter(loc => loc.status === 'wantToVisit'),
           wantToLive: locations.filter(loc => loc.status === 'wantToLive')
         };
+        
+        console.log('📊 Travel: Organized data:', organizedData);
         setTravelData(organizedData);
+        setLoading(false);
         return;
       } catch (err) {
-        console.error('Failed to load travel locations:', err);
+        console.error('❌ Travel: Failed to load travel locations:', err);
+        setLoading(false);
       }
       // Fallback to static data
       // Fallback to static data if no admin data exists
@@ -105,42 +113,36 @@ const Travel: React.FC = () => {
       </header>
 
       <main className="pt-24 sm:pt-32 pb-8 sm:pb-16 px-4 sm:px-6 lg:px-8 flex-1 relative z-10">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h1 className="text-4xl sm:text-5xl font-bold text-text-primary mb-4">My Travel Journey</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold text-text-primary mb-4">Travel Map</h1>
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              Exploring the world, one destination at a time. From places I've called home to dream destinations on my bucket list.
+              Places I've lived, visited, and dream of exploring.
             </p>
           </div>
 
-          {/* Travel Stats */}
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="inline-flex items-center space-x-2">
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
+                <span className="text-text-secondary">Loading travel data...</span>
+              </div>
+            </div>
+          ) : (
+            <>
+          {/* Travel Stats - Now Clickable */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {Object.entries(travelData).map(([status, locations]) => (
-              <div key={status} className="bg-surface/30 rounded-lg p-4 text-center">
-                <div className="text-2xl mb-2">{tabIcons[status as TravelStatus]}</div>
-                <div className="text-2xl font-bold text-accent mb-1">{locations.length}</div>
-                <div className="text-sm text-text-secondary">{tabLabels[status as TravelStatus]}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Tab Navigation */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {Object.keys(travelData).map((status) => (
               <button
                 key={status}
                 onClick={() => setActiveTab(status as TravelStatus)}
-                className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 ${
-                  activeTab === status
-                    ? 'bg-accent text-background'
-                    : 'bg-surface/30 text-text-secondary hover:bg-surface/50 hover:text-text-primary'
+                className={`bg-surface/30 rounded-lg p-4 text-center transition-all duration-300 hover:bg-surface/50 hover:scale-105 ${
+                  activeTab === status ? 'ring-2 ring-accent bg-surface/50' : ''
                 }`}
               >
-                <span>{tabIcons[status as TravelStatus]}</span>
-                <span>{tabLabels[status as TravelStatus]}</span>
-                <span className="bg-background/20 px-2 py-1 rounded-full text-xs">
-                  {travelData[status as TravelStatus].length}
-                </span>
+                <div className="text-2xl mb-2">{tabIcons[status as TravelStatus]}</div>
+                <div className="text-2xl font-bold text-accent mb-1">{locations.length}</div>
+                <div className="text-sm text-text-secondary">{tabLabels[status as TravelStatus]}</div>
               </button>
             ))}
           </div>
@@ -163,6 +165,8 @@ const Travel: React.FC = () => {
               <h3 className="text-xl font-bold text-text-primary mb-2">No {tabLabels[activeTab]} Yet</h3>
               <p className="text-text-secondary">This section is waiting to be filled with new adventures!</p>
             </div>
+          )}
+            </>
           )}
         </div>
       </main>

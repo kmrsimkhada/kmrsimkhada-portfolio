@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Layout Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #0D1117;
+            color: #F0F6FC;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #22d3ee;
+            border-radius: 8px;
+        }
+        .mobile-only {
+            display: none;
+        }
+        @media (max-width: 640px) {
+            .mobile-only {
+                display: block;
+            }
+            .desktop-only {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Mobile Layout Test</h1>
+    
+    <div class="test-section">
+        <h2>Viewport Test</h2>
+        <p class="desktop-only">Desktop view detected</p>
+        <p class="mobile-only">Mobile view detected ✓</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Text Overflow Test</h2>
+        <p>This is a very long text that should wrap properly on mobile devices without causing horizontal scrolling or layout issues. The text should be readable and properly contained within the viewport.</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Z-index Test</h2>
+        <p>This content should be visible and not hidden behind any overlays or fixed elements.</p>
+    </div>
+    
+    <script>
+        console.log('Viewport width:', window.innerWidth);
+        console.log('Viewport height:', window.innerHeight);
+        console.log('Device pixel ratio:', window.devicePixelRatio);
+    </script>
+</body>
+</html>
+</text>
+</invoke>

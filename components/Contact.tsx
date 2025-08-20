@@ -6,9 +6,9 @@ interface ContactProps {
 
 const Contact: React.FC<ContactProps> = ({ email }) => {
   return (
-    <section id="contact" className="py-24 text-center flex flex-col items-center">
+    <section id="contact" className="py-16 sm:py-24 text-center flex flex-col items-center px-4 sm:px-0">
       <h2 className="text-accent font-medium mb-2">What’s Next?</h2>
-      <h3 className="text-4xl md:text-5xl font-bold text-text-primary mb-4">Get In Touch</h3>
+      <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary mb-4 leading-tight">Get In Touch</h3>
       <p className="text-text-secondary max-w-xl mx-auto mb-8">
         I'm currently open to new opportunities and my inbox is always open. Whether you have a question or just want to say hi, I’ll do my best to get back to you!
       </p>

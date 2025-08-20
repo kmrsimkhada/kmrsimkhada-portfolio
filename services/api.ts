@@ -1,8 +1,6 @@
 // API Configuration
-// Use Vite's env flags to detect production reliably
-const API_BASE_URL = (typeof import.meta !== 'undefined' && (import.meta as any).env && (import.meta as any).env.PROD)
-  ? 'https://qa6iwynfo6.execute-api.ap-southeast-2.amazonaws.com/dev'
-  : 'http://localhost:3000/dev';
+// Use production URL since backend is deployed to AWS
+const API_BASE_URL = 'https://qa6iwynfo6.execute-api.ap-southeast-2.amazonaws.com/dev';
 
 class ApiService {
   private baseUrl: string;
@@ -161,7 +159,10 @@ class ApiService {
 
   // Skills
   async getSkills() {
-    return this.request('/skills');
+    console.log('🌐 API Service: Calling getSkills from:', `${this.baseUrl}/skills`);
+    const result = await this.request('/skills');
+    console.log('📡 API Service: getSkills result:', result);
+    return result;
   }
 
   async createSkill(skill: any) {
